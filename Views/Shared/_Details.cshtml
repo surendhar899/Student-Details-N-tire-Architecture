@@ -1,0 +1,40 @@
+﻿@model StudentDAL.Models.StudentModel
+
+
+
+
+               <form action="Details">
+					<div class="form-group"> 
+                        @Html.LabelFor(m=>m.Id):
+                        @Model.Id
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m=>m.Name):
+                         @Model.Name
+                    </div>
+                    <div class="form-group">
+                         @Html.LabelFor(m=>m.Gender):
+                         @Model.Gender
+                    </div>
+                    <div class="form-group"> 
+                          @Html.LabelFor(m=>m.Department) :
+                          @Model.Department
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m=>m.Cricket) :
+                        @Model.Cricket
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m=>m.Email) :
+                        @Model.Email
+                    </div>
+	                <div class="form-group">
+                        @Html.LabelFor(m=>m.Football) :
+                        @Model.Football
+                    </div>
+	                <div class="form-group">
+                        @Html.LabelFor(m=>m.Vollyball) :
+                        @Model.Vollyball
+                    </div>
+				</form>
+

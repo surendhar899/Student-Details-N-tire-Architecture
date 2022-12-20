@@ -1,0 +1,158 @@
+﻿@model IEnumerable<StudentDAL.Models.StudentModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="card">
+    <div class="card-body">
+        <div class="card-title">
+              <h2>Student Details</h2>
+        </div>
+      
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+  @if( TempData["AlertMessage"] !=null)
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong> @TempData["AlertMessage"] 
+    </div>
+}
+ @if( TempData["AlertMessage1"] !=null)
+{
+    <div class="alert alert-danger">
+        <strong>Danger !</strong> @TempData["AlertMessage1"] 
+    </div>
+}
+ @if( TempData["AlertMessage2"] !=null)
+{
+    <div class="alert alert-danger">
+        <strong>Danger !</strong> @TempData["AlertMessage2"] 
+    </div>
+}
+<form asp-action="Search" asp-controller="Student">
+ <div class="form-group">
+      <input type="text" name="SearchText" size="20">   
+      <input type="submit" value="Search" />
+  </div>
+  </form>
+<table class="table table-bordered table-striped" id="StudentsGrid">
+    <thead class="bg-black text-white">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model=>model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Skills)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cricket)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Football)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vollyball)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem=>item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Skills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cricket)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Football)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vollyball)
+            </td>
+            <td>
+                <a class="details btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                 <a class="details btn btn-primary btn-sm" href="javascript:;" data-toggle="modal" data-target="#myModal"><i class="bi bi-eye"></i>View</a> |
+                <a class="details btn btn-primary btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+</div>
+
+<div class="container"> 
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Students Details</h4>
+        </div>
+        <div class="modal-body"> </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>      
+    </div>
+  </div> 
+</div>
+  <script type="text/javascript">
+          $("document").ready(function() {
+            
+              $("#StudentsGrid .details").click(function () {
+                  var Id = $(this).closest("tr").find("td").eq(0).html().trim();
+                
+            $.ajax({
+                    type: "POST",
+                    url: "/Student/Details",
+                    data: { id: Id },
+              
+                    success: function (response) {
+                        $("#myModal").find(".modal-body").html(response);
+                        
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {    
+                        alert(response.responseText);
+                        alert("error");
+                    }
+                });
+            });
+
+          
+        });
+    </script>
+

@@ -1,0 +1,130 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model StudentDAL.Models.StudentModel
+@*@{
+    var studentdetails = @ViewBag.studentdetails;
+}
+*@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.header1{
+     padding: 50px;
+  font-family: Calibri, Helvetica, sans-serif;
+  background-color: pink;
+}
+
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.container {
+  padding: 16px;
+}
+.color{
+    color:red;
+}
+.header {
+   padding: 10px;
+ 
+}
+
+</style>
+</head>
+
+
+<body>
+
+    
+<div class="card">
+    <div class="card-body">
+       
+<form asp-controller="Student" asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="header1">
+     <div class="header">
+           <center> <h2> Edit Student Register Form</h2></center>  
+        </div>
+   <hr>
+  <div >
+      @Html.ValidationSummary(true,"")
+@*  <div class="form-group">
+      @Html.LabelFor(m=>m.Id):
+      @Html.TextBoxFor(m=>m.Id,new{@class="color form-group",@placeholder="id"})
+      @Html.ValidationMessageFor(m=>m.Id,"",new{@class="text-danger"})
+  </div>*@
+  <div class="form-group">
+      @Html.LabelFor(m=>m.Name):
+      @Html.TextBoxFor(m=>m.Name,new {@class="color",@placeholder="Student Name"})
+      @Html.ValidationMessageFor(m=>m.Name,"",new{@class="text-danger"})
+       <span asp-validation-for="Name" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+      @Html.LabelFor(m=>m.Email):
+      @Html.TextBoxFor(m=>m.Email,new {@class="color",@placeholder="Email"})
+      @Html.ValidationMessageFor(m=>m.Email,"",new{@class="text-danger"})
+  </div>
+  <div class="form-group">
+      Male @Html.RadioButton("Gender","Male")
+      Female @Html.RadioButton("Gender","Female")</br>
+      @Html.ValidationMessageFor(m=>m.Gender,"",new{@class="text-danger"})
+  </div>
+  <div class="form-group">
+      @Html.LabelFor(m=>m.Department) :
+      @Html.DropDownListFor(m=>m.Department,(IEnumerable<SelectListItem>)ViewBag.department)
+      @Html.ValidationMessageFor(m=>m.Department,"",new{@class="text-danger"})
+  </div>
+  <div class="form-group">
+      @Html.LabelFor(m=>m.Skills)<br />
+      @Html.LabelFor(m=>m.Cricket)
+      @Html.CheckBoxFor(m=>m.Cricket)
+      @Html.LabelFor(m=>m.Football)
+      @Html.CheckBoxFor(m=>m.Football)
+      @Html.LabelFor(m=>m.Vollyball)
+      @Html.CheckBoxFor(m=>m.Vollyball)
+      @Html.ValidationMessageFor(m=>m.Skills,"",new{@class="text-danger"})
+  </div>
+  <button type="submit">Submit</button>
+  </div>
+  </div>
+</form>
+
+</body>
+</div>
+</div>
+</html>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
