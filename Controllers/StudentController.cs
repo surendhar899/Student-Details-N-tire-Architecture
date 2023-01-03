@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Student_Details_N_tire.Filter;
 using StudentBAL;
 using StudentDAL.Models;
 using System.Security.Claims;
 
 namespace Student_Details_N_tire.Controllers
 {
+    [MyexceptionFilter]
     //changes
     [Authorize]
     public class StudentController : Controller
@@ -18,17 +20,22 @@ namespace Student_Details_N_tire.Controllers
         public StudentController(StudentInterface studentInterface)
         {
             _studentInterface = studentInterface;
+           //fghtrjy
         }
         [AllowAnonymous]
         public ActionResult login(login login)
         {
+           
             var user = login.UserName;
             var pass=login.Password;
+            ViewBag.name=user;
             var std = _studentInterface.login(login);
             var username = std[0].UserName;
+
             var password = std[0].Password;
             if(username==user && password==pass)
             {
+                TempData["name"]=username;
                 List<Claim> claims = new List<Claim>()
           {
               new Claim(ClaimTypes.NameIdentifier, login.UserName),
@@ -45,7 +52,7 @@ namespace Student_Details_N_tire.Controllers
                  new ClaimsPrincipal(claimsIdentity),properties);
                 return RedirectToAction("Index", "Home");
             };
-            TempData["AlertMessage"] = "Please Enter correct Or Password";
+            TempData["AlertMessage"] = "Please Enter correct username Or Password";
             return RedirectToAction("Login","Home");
         }
         

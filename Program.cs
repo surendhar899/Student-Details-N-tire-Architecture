@@ -13,13 +13,13 @@ builder.Services.AddDbContext<DependencyInjectionContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("StudentDbContext")));
 builder.Services.AddScoped<IStudent,StudentDA>();
 builder.Services.AddScoped<StudentInterface, StudentBA>();
-builder.Services.AddAuthentication(
-    CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(option =>
-    {
-        option.LoginPath = "/Home/Login";
-        option.ExpireTimeSpan = TimeSpan.FromMinutes(20); 
-    });
+//builder.Services.AddAuthentication(
+//    CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie(option =>
+//    {
+//        option.LoginPath = "/Home/Login";
+//        option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+//    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,6 +39,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Login}/{id?}");
+    pattern: "{controller=Home}/{action=demo}/{id?}");
 
 app.Run();

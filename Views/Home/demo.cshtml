@@ -1,0 +1,44 @@
+﻿<a class="details btn btn-primary btn-sm" id="demo" href="javascript:;" data-toggle="modal" data-target="#myModal"><i class="bi bi-eye"></i>View</a>
+<script type="text/javascript">
+$("document").ready(function() {
+    $("#demo").click(function() {
+        $.ajax({
+            type:"POST",
+            url: "/Home/Json",
+            success: function(response) {
+               
+                $("#myModel").find(".modal-body").html(response);
+            },
+            failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {    
+                        alert(response.responseText);
+                        alert("error");
+                    }
+        });
+       
+       });
+
+});	
+</script>
+
+   <div class="container"> 
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Students Details</h4>
+        </div>
+        <div class="modal-body"> </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>      
+    </div>
+  </div> 
+</div>
+   
+
+
