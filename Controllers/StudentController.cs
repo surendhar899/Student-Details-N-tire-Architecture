@@ -10,6 +10,7 @@ using System.Security.Claims;
 
 namespace Student_Details_N_tire.Controllers
 {
+    //changes
     [Authorize]
     public class StudentController : Controller
     {
@@ -44,10 +45,10 @@ namespace Student_Details_N_tire.Controllers
                  new ClaimsPrincipal(claimsIdentity),properties);
                 return RedirectToAction("Index", "Home");
             };
-            TempData["AlertMessage"] = "Please Enter Valid UserName Or Password";
+            TempData["AlertMessage"] = "Please Enter correct Or Password";
             return RedirectToAction("Login","Home");
         }
-
+        
         // GET: StudentController
      
         public ActionResult Search(string SearchText)
