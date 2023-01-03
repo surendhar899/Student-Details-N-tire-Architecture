@@ -20,7 +20,7 @@ namespace Student_Details_N_tire.Controllers
         public StudentController(StudentInterface studentInterface)
         {
             _studentInterface = studentInterface;
-           
+           //fghtrjy
         }
         [AllowAnonymous]
         public ActionResult login(login login)
